@@ -6,10 +6,9 @@ $(document).ready(function () {
 function Controller() {
     this.bar_chart = {};
     this.$count_num = $("#chart .count_num");
-    this.post_count = 0;
     this.canvas, this.stage, this.exportRoot, this.sound;
     this.canvas = document.getElementById("canvas");
-    this.exportRoot = new lib.post();
+    this.exportRoot = new lib.kusuribako();
 
     this.stage = new createjs.Stage(this.canvas);
     this.stage.addChild(this.exportRoot);
@@ -45,26 +44,24 @@ function Controller() {
         }
     });
 }
-Controller.prototype.postFlag = function (b) {
+Controller.prototype.kusuribakoFlag = function (b) {
     switch (b) {
     case 0:
         this.exportRoot.gotoAndStop(0);
-        $("#post_message").hide();
-        this.exportRoot.countpost = 0;
-        $("#post_count").html("");
+        $("#kusuribako_message").hide();
+        $("#kusuribako_count").html("");
         break;
     case 1:
-        if (this.exportRoot.currentFrame != 1) {
-            this.exportRoot.gotoAndStop(1);
+        if (this.exportRoot.currentFrame != 0) {
+            this.exportRoot.gotoAndStop(0);
         }
-        this.exportRoot.countpost++;
         this.exportRoot.play();
-        $("#post_message").show();
-        $("#post_count").html("");
-        $("#post_count").html("postal items " + this.exportRoot.countpost);
+        $("#kusuribako_message").show();
+        $("#kusuribako_count").html("");
+        $("#kusuribako_count").html("hogehoge ");
         break;
     }
-    this.post_count = this.exportRoot.countpost;
+    this.kusuribako_count = this.exportRoot.countkusuribako;
 }
 Controller.prototype.initChart = function () {
     var data = {
@@ -102,8 +99,7 @@ Controller.prototype.initChart = function () {
         barDatasetSpacing: 0,
         animation: true,
         animationSteps: 60,
-        animationEasing: "easeOutQuart",
-        onAnimationComplete: null
+        animationEasing: "easeOutQuart"
     });
 };
 Controller.prototype.setTemperature = function (num) {
